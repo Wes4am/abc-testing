@@ -1,0 +1,16 @@
+# NiceGUI frontend
+nicegui>=1.15.0
+
+# Groq client
+groq>=0.2.1
+
+# Pydantic for schemas & type validation
+pydantic>=2.3.0
+
+# Excel export
+openpyxl>=3.1.2
+
+# Optional: if using async features & threads
+anyio>=3.7.0
+
+dotenv
