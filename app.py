@@ -12,7 +12,7 @@ from backend.exporter import export_csv, export_xlsx
 # Page config
 st.set_page_config(
     page_title="AI Variation Generator",
-    page_icon="🤖",
+    page_icon="",
     layout="wide"
 )
 
@@ -26,7 +26,7 @@ if 'output_rows' not in st.session_state:
     st.session_state.output_rows = []
 
 # Title
-st.title("🤖 AI Variation Generator")
+st.title("AI Variation Generator")
 
 # Original Message Input
 st.subheader("Original Message")
@@ -44,7 +44,7 @@ st.subheader("Variations")
 # Add Variation Button
 col1, col2, col3 = st.columns([1, 1, 4])
 with col1:
-    if st.button("➕ Add Variation", use_container_width=True):
+    if st.button("Add Variation", use_container_width=True):
         st.session_state.variations.append({
             'name': f'V{len(st.session_state.variations)+1}',
             'params': ''
@@ -94,22 +94,22 @@ st.divider()
 col1, col2, col3, col4 = st.columns([2, 2, 2, 6])
 
 with col1:
-    generate_clicked = st.button("🚀 Generate Variations", type="primary", use_container_width=True)
+    generate_clicked = st.button("Generate Variations", type="primary", use_container_width=True)
 
 with col2:
-    export_csv_clicked = st.button("📄 Export CSV", use_container_width=True)
+    export_csv_clicked = st.button("Export CSV", use_container_width=True)
 
 with col3:
-    export_xlsx_clicked = st.button("📊 Export XLSX", use_container_width=True)
+    export_xlsx_clicked = st.button("Export XLSX", use_container_width=True)
 
 # Generate Variations
 if generate_clicked:
     if not st.session_state.variations:
-        st.warning("⚠️ Add at least one variation")
+        st.warning("Add at least one variation")
     elif not original_message:
-        st.warning("⚠️ Please enter an original message")
+        st.warning("Please enter an original message")
     else:
-        with st.spinner("🔄 Generating variations..."):
+        with st.spinner("Generating variations..."):
             # Run async generation
             async def generate_all():
                 tasks = []
@@ -132,7 +132,7 @@ if generate_clicked:
                 for i in range(len(results))
             ]
             
-            st.success("✅ Generation complete!")
+            st.success("Generation complete!")
             st.rerun()
 
 # Display Results
@@ -157,16 +157,16 @@ if st.session_state.output_rows:
 # Export handlers
 if export_csv_clicked:
     if not st.session_state.output_rows:
-        st.warning("⚠️ Nothing to export")
+        st.warning("Nothing to export")
     else:
         filepath = os.path.join(os.getcwd(), 'variations_export.csv')
         export_csv(st.session_state.output_rows, filepath)
-        st.success(f"✅ Exported CSV to {filepath}")
+        st.success(f"Exported CSV to {filepath}")
 
 if export_xlsx_clicked:
     if not st.session_state.output_rows:
-        st.warning("⚠️ Nothing to export")
+        st.warning("Nothing to export")
     else:
         filepath = os.path.join(os.getcwd(), 'variations_export.xlsx')
         export_xlsx(st.session_state.output_rows, filepath)
-        st.success(f"✅ Exported XLSX to {filepath}")
+        st.success(f"Exported XLSX to {filepath}")
